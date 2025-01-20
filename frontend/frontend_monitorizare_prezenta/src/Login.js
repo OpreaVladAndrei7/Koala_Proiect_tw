@@ -25,7 +25,13 @@ function Login() {
         const data = await response.json();
         if (data.message === "Login successful!") {
           alert("Login successful!");
-          navigate("/main");
+          localStorage.setItem("userId", data.user_id);
+          if (data.type === "OE") {
+            navigate("/main");
+          }
+          if (data.type === "attendant") {
+            navigate("/attendance");
+          }
         } else {
           setError("Invalid email or password.");
         }
